@@ -76,8 +76,7 @@
       <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Fonts.dll</HintPath>
     </Reference>
     <Reference Include="NetCheatX.Core, Version=1.0.8.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NetCheatX.Core.1.0.8-alpha\lib\net40\NetCheatX.Core.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\NetCheatX.Core.1.0.13-alpha\lib\net40\NetCheatX.Core.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

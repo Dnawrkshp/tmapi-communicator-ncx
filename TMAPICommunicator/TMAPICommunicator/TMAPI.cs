@@ -255,12 +255,19 @@ namespace TMAPICommunicator
         /// <summary>Attach and continue the current process from the target.</summary>
         public bool AttachProcess(bool continueProcess = true)
         {
-            PS3TMAPI.GetProcessList(Target, out Parameters.processIDs);
+            byte[] buffer = new byte[4];
+            if (PS3TMAPI.GetProcessList(Target, out Parameters.processIDs) != PS3TMAPI.SNRESULT.SN_S_OK)
+                return false;
             if (Parameters.processIDs.Length <= 0)
                 return false;
 
             ulong uProcess = Parameters.processIDs[0];
             Parameters.ProcessID = Convert.ToUInt32(uProcess);
+
+            // Check if already attached
+            if (this.GetMemory(0x10000, ref buffer) == PS3TMAPI.SNRESULT.SN_S_OK)
+                return true;
+
             if (PS3TMAPI.ProcessAttach(Target, PS3TMAPI.UnitType.PPU, Parameters.ProcessID) != PS3TMAPI.SNRESULT.SN_S_OK)
                 return false;
 

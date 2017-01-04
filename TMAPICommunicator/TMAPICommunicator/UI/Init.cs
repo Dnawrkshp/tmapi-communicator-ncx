@@ -139,6 +139,14 @@ namespace TMAPICommunicator.UI
 
         private void RefreshList(bool first = false)
         {
+            LabelTarget.SuspendLayout();
+            LabelIP.SuspendLayout();
+            LabelAttached.SuspendLayout();
+
+            LabelTarget.Text = "Target: NULL";
+            LabelIP.Text = "IP/Port: 0.0.0.0:0";
+            LabelAttached.Text = "Attached: False";
+
             LvTM.Items.Clear();
             if (_tmapi != null)
             {
@@ -150,12 +158,8 @@ namespace TMAPICommunicator.UI
                     MbNotInstalled.Visible = true;
                     LvTM.Enabled = false;
 
-                    LabelTarget.Text = "Target: NULL";
-                    LabelIP.Text = "IP/Port: 0.0.0.0:0";
-                    LabelAttached.Text = "Attached: False";
-
                     MetroFramework.MetroMessageBox.Show(Application.OpenForms["Display"], "Please download and install the Target Manager before using this Communicator.", "Looks like you don't have the Target Manager installed.");
-                    return;
+                    goto exit;
                 }
 
 
@@ -168,12 +172,8 @@ namespace TMAPICommunicator.UI
                     MbNotInstalled.Visible = false;
                     LvTM.Enabled = false;
 
-                    LabelTarget.Text = "Target: NULL";
-                    LabelIP.Text = "IP/Port: 0.0.0.0:0";
-                    LabelAttached.Text = "Attached: False";
-
                     MetroFramework.MetroMessageBox.Show(Application.OpenForms["Display"], "Please open the Target Manager and add your PS3 as a debugging station.", "Looks like you don't have the Target Manager configured.");
-                    return;
+                    goto exit;
                 }
 
                 // Target Manager configured
@@ -208,6 +208,11 @@ namespace TMAPICommunicator.UI
                     }
                 }
             }
+
+            
+            exit: LabelTarget.ResumeLayout(true);
+            LabelIP.ResumeLayout(true);
+            LabelAttached.ResumeLayout(true);
         }
 
         #endregion
@@ -250,7 +255,7 @@ namespace TMAPICommunicator.UI
                     }
                 }
 
-                CmTM.Show(LvTM, e.Location);
+                CmTM.Show(this, e.Location);
             }
         }
 
@@ -260,10 +265,8 @@ namespace TMAPICommunicator.UI
                 return;
 
             if (!_tmapi.ConnectTarget(LvTM.SelectedIndices[0]))
-                MetroFramework.MetroMessageBox.Show(Application.OpenForms["Display"], "Failed to connect to target.");
-
-            // Attach if AttachOnConnect
-            if (McAttachOnConnect.Checked)
+                MetroFramework.MetroMessageBox.Show(Application.OpenForms["Display"], "Please ensure that both this PC and the PS3 are properly connected to the internet.", "Failed to connect to target.");
+            else if (McAttachOnConnect.Checked) // Attach if AttachOnConnect
                 _tmapi.AttachProcess(McContinueOnAttach.Checked);
 
             RefreshList();

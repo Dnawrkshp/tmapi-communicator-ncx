@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("");
             this.LvTM = new MetroFramework.Controls.MetroListView();
             this.columnName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.CmTM = new MetroFramework.Controls.MetroContextMenu(this.components);
@@ -77,7 +77,7 @@
             this.LvTM.FullRowSelect = true;
             this.LvTM.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.LvTM.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3});
+            listViewItem4});
             this.LvTM.LabelWrap = false;
             this.LvTM.Location = new System.Drawing.Point(0, 0);
             this.LvTM.MultiSelect = false;
@@ -110,7 +110,7 @@
             this.refreshListToolStripMenuItem,
             this.openTargetManagerToolStripMenuItem});
             this.CmTM.Name = "CmTM";
-            this.CmTM.Size = new System.Drawing.Size(190, 158);
+            this.CmTM.Size = new System.Drawing.Size(190, 180);
             // 
             // connectToolStripMenuItem
             // 

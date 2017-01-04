@@ -126,6 +126,11 @@ namespace TMAPICommunicator
             return false;
         }
 
+        public Types.ContextMenuPath[] OnXShow(string[] tags, Type[] supportedOutputTypes)
+        {
+            return null;
+        }
+
         public bool Reconnect()
         {
             // Make sure our reconnect variables are valid
